@@ -7,7 +7,7 @@ from datetime import datetime
 from PIL import Image
 import numpy as np
 
-df = pd.read_csv('../train.csv')
+df = pd.read_csv(r'files/train.csv')
 
 
 
@@ -54,7 +54,7 @@ df2[colunas_texto] = df2[colunas_texto].apply(lambda x: x.str.strip())
 
 st.header('Curry Company')
 
-image_path = '../logo.png'
+image_path = r'files/logo.png'
 image = Image.open(image_path)
 st.sidebar.image(image, width=120)
 
