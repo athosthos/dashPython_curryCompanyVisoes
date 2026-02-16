@@ -26,27 +26,18 @@ df1 = df.replace('NaN ', np.nan)
 linhas_para_limpar = ['Delivery_person_Age', 'multiple_deliveries', 'Road_traffic_density', 'City']
 df2 = df1.dropna(subset=linhas_para_limpar).copy()
 
-#convertendo a idade para número
+#removendo espaço de todas as colunas que necessitam usando lambda
+colunas_texto = ['Festival', 'Road_traffic_density', 'ID', 'Type_of_vehicle', 'Type_of_order', 'Weatherconditions', 'City']
+df2[colunas_texto] = df2[colunas_texto].apply(lambda x: x.str.strip())
+
+#conversões de tipos de dados
 df2['Delivery_person_Age'] = df2['Delivery_person_Age'].astype(int)
-
-#convertendo os ratings para float
 df2['Delivery_person_Ratings'] = df2['Delivery_person_Ratings'].astype(float)
-
-#convertendo a coluna de data da ordem para o tipo data
 df2['Order_Date'] = pd.to_datetime(df2['Order_Date'], format = '%d-%m-%Y')
-
-#convertendo a coluna de multiplos deliveries para número
 df2['multiple_deliveries'] = df2['multiple_deliveries'].astype(int)
 
 #restaurando indice do dataframe
 df2 = df2.reset_index(drop=True)
-
-#removendo espaço das estremidade
-df2['ID'] = df2['ID'].str.strip()
-
-#removendo espaço de todas as colunas que necessitam usando lambda
-colunas_texto = ['Festival', 'Road_traffic_density', 'Type_of_vehicle', 'Type_of_order', 'Weatherconditions', 'City']
-df2[colunas_texto] = df2[colunas_texto].apply(lambda x: x.str.strip())
 
 #criando coluna de tempo sem o "min"
 df2['Clean_time_minutes'] = df2['Time_taken(min)'].apply(lambda x: x.split('(min) ')[1])
