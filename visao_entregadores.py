@@ -7,6 +7,8 @@ from datetime import datetime
 from PIL import Image
 import numpy as np
 
+st.set_page_config(page_title="Visão Entregadores", layout="wide")
+
 df = pd.read_csv(r'files/train.csv')
 
 
