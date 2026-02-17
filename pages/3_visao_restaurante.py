@@ -50,14 +50,12 @@ def clean_df (df):
 
 
 def barra_lateral(df):
-    st.header('Curry Company')
-    st.markdown('##### Dashboard - Visão de Empresa')
 
     image_path = r'files/logo.png'
     image = Image.open(image_path)
     st.sidebar.image(image, width=120)
 
-    st.sidebar.markdown('# Filtros')
+    st.sidebar.markdown('# Curry Company')
 
     st.sidebar.markdown('---')
 
@@ -84,10 +82,11 @@ def barra_lateral(df):
     linhas = df['Road_traffic_density'].isin(densidade_transito)
     df = df.loc[linhas, :]
 
-
     st.sidebar.markdown('---')
 
     st.sidebar.markdown('### Powered by Athos Oliveira')
+
+    return df
 
 
 
@@ -108,8 +107,12 @@ df = clean_df(df)
 
 
 
-st.set_page_config(page_title="Visão Restaurante", layout="wide")
-barra_lateral(df)
+st.set_page_config(
+    page_title="Visão Restaurante",
+    page_icon="📊",
+    layout="wide"
+)
+df = barra_lateral(df)
 st.header('Curry Company')
 st.markdown('##### Dashboard - Visão de Restaurante')
 tab1, = st.tabs(['Visão Gerancial'])
